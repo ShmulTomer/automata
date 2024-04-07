@@ -112,10 +112,14 @@ function ExportAsLaTeX() {
 		} else if (selectedColor == 'style2') {
 			var colorStyle = ', every state/.style={fill,draw=none,red,text=white}, accepting/.style ={orange!80,text=white}]';
 			header += colorStyle;
-		}
+		}  
 	
 		header += ']\n';
-	
+		
+		if (selectedColor == "default") {
+			header += "\\tikzset{accepting/.style={double distance=1mm}}\n"
+		}
+
 		var body = this.generateLaTeXBody();
 		var footer = '\\end{tikzpicture}\n' +
 					 '\\end{document}\n';
