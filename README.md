@@ -17,6 +17,9 @@ This tool is based on the already excellent [website by Evan Wallace](http://mad
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
+[![All Contributors](https://img.shields.io/github/all-contributors/ShmulTomer/Automata?color=ee8449&style=flat-square)](#contributors)
+
+
 Contributors:
 - Tomer Shmul
 - Matt Steele
