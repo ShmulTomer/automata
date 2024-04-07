@@ -1,0 +1,22 @@
+
+
+To Do:
+- fix arcs 
+- fix self loops
+- handle changes with new package
+    - name vs text field
+    - can two nodes have the same name? maybe diff. b/w text and name 
+    - can nodes have no name?
+
+
+
+two nodes can't have same name
+all nodes must have names
+
+
+Colors:
+Blue, Green, Orange, Red 
+- other style changes
+
+
+, every state/.style={fill,draw=none,orange,text=white,circular drop shadow}
