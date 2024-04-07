@@ -7,7 +7,13 @@ This is the source code for the Automata Designer used for Georgia Tech's CS 451
 
 ## About
 
-This tool is based on the already excellent [website by Evan Wallace](http://madebyevan.com/fsm/), and has been updated to use the newer Tikz Automata library as well as with additional functionality.
+This tool is based on the already excellent [website by Evan Wallace](http://madebyevan.com/fsm/), and has been updated to use the newer Tikz Automata library as well as with additional functionality. It can be used to diagram Automata such as Finite State Machines or Turing Machines.
+
+## Local Setup
+
+In the main directory:
+`npm install`
+`live-server`
 
 ## Contributors
 
