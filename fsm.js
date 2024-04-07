@@ -85,6 +85,7 @@ function clearAll() {
 
     // Reset selected object
     selectedObject = null;
+	globalCounter = 0;
 
     // Redraw the canvas
     draw();
@@ -581,9 +582,6 @@ function Link(a, b) {
   // make anchor point relative to the locations of nodeA and nodeB
   this.parallelPart = 0.5; // percentage from nodeA to nodeB
   this.perpendicularPart = 0; // pixels from line between nodeA and nodeB
-
-  // Additional properties for LaTeX export
-  this.isLoop = false; // Indicates if it's a loop (self-link)
 }
 
 Link.prototype.getAnchorPoint = function () {
@@ -820,12 +818,7 @@ Node.prototype.setAnchorPoint = function (x, y) {
 
 Node.prototype.draw = function (c) {
   // Set fill style based on selectedColor
-  if (selectedColor === "default") {
-    normalColor = "transparent";
-    acceptColor = "transparent";
-    initialColor = "transparent";
-    textColor = "black";
-  } else if (selectedColor == "style1") {
+  if (selectedColor == "style1") {
     normalColor = "blue";
     acceptColor = "green";
     initialColor = "blue";
@@ -835,6 +828,12 @@ Node.prototype.draw = function (c) {
     acceptColor = "orange";
     initialColor = "red";
     textColor = "white";
+  } else {
+	selectedColor = 'default';
+	normalColor = "transparent";
+    acceptColor = "transparent";
+    initialColor = "transparent";
+    textColor = "black";
   }
 
   if (this.isAcceptState) {
@@ -1007,11 +1006,16 @@ function restoreBackup() {
   try {
     var backup = JSON.parse(localStorage["fsm"]);
 
+	selectedColor = backup.style;
+	globalCounter = backup.globalCounter;
+
     for (var i = 0; i < backup.nodes.length; i++) {
       var backupNode = backup.nodes[i];
       var node = new Node(backupNode.x, backupNode.y);
       node.isAcceptState = backupNode.isAcceptState;
+	  node.isInitial = backupNode.isInitial;
       node.text = backupNode.text;
+	  node.id = backupNode.id;
       nodes.push(node);
     }
     for (var i = 0; i < backup.links.length; i++) {
@@ -1050,6 +1054,8 @@ function saveBackup() {
   var backup = {
     nodes: [],
     links: [],
+	style: selectedColor,
+	globalCounter: globalCounter,
   };
   for (var i = 0; i < nodes.length; i++) {
     var node = nodes[i];
@@ -1058,6 +1064,8 @@ function saveBackup() {
       y: node.y,
       text: node.text,
       isAcceptState: node.isAcceptState,
+	  id: node.id,
+	  isInitial: node.isInitial,
     };
     backup.nodes.push(backupNode);
   }
