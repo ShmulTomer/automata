@@ -3,7 +3,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-This is the source code for the Automata Designer used for Georgia Tech's CS 4510 Automata and Complexity. It is hosted using GitHub Pages, and you can visit it at: https://drawautomata.xyz.
+This is the source code for the Automata Designer used for Georgia Tech's CS 4510 Automata and Complexity. It is hosted using GitHub Pages, and you can visit it at: drawautomata.xyz.
 
 ## About
 
