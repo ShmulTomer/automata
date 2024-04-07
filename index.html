@@ -377,6 +377,13 @@
           <b>Type special symbols:</b> put a backslash before it (like
           "\rightarrow", "\sqcup", or "\emptyset")
         </li>
+        <li>
+            <b>Save this diagram:</b> 
+            <a href="javascript:saveAsJSON()" style="margin-right: 10px;">Download JSON</a>
+            <label for="fileInput" style="margin-right: 5px;">Upload JSON</label>
+            <input type="file" id="fileInput" accept=".json" onchange="uploadJSON()" style="display: none;">
+            <button onclick="document.getElementById('fileInput').click()">Upload</button>
+        </li>
       </ul>
     </div>
     <p>
