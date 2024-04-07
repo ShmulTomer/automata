@@ -11,6 +11,8 @@ This tool is based on the already excellent [website by Evan Wallace](http://mad
 
 ## Contributors ✨
 
+If you want to contribute to this tool, create a pull request (direct pushes to main are blocked).
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
