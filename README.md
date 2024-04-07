@@ -51,11 +51,6 @@ If you want to contribute to this tool, create a pull request (direct pushes to 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 
-- Tomer Shmul
-- Matt Steele
-- Austin Morris
-- Akaash Dash
-
 ## License
 
 This project is licensed under the MIT License.
