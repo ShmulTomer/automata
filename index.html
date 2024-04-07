@@ -290,6 +290,27 @@
           opacity: 0;
         }
       }
+
+      textarea#output {
+        width: 80%; /* Adjust width as per your layout */
+        height: 150px; /* Set a fixed height */
+        margin: 20px auto; /* Center align and add vertical spacing */
+        padding: 10px; /* Padding inside the textarea */
+        border: 2px solid #ccc; /* Solid border with light color */
+        border-radius: 8px; /* Rounded corners */
+        background-color: #fafafa; /* Light background color */
+        font-family: "Roboto", sans-serif; /* Consistent font with the rest of the page */
+        font-size: 14px; /* Readable font size */
+        color: #333; /* Darker text for readability */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        resize: vertical; /* Allow only vertical resizing */
+      }
+
+      textarea#output:focus {
+        border-color: #007bff; /* Highlight border on focus */
+        outline: none; /* Remove default focus outline */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glowing effect on focus */
+      }
     </style>
     <script src="fsm.js"></script>
     <script>
