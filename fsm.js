@@ -101,7 +101,7 @@ function ExportAsLaTeX() {
 					 '\\usepackage{tikz}\n' +
 					 '\\usetikzlibrary{automata, positioning}\n' +
 					 '\\begin{document}\n' +
-					 '\\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=0.2';
+					 '\\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=0.17';
 	
 		// Add the style based on the selected color
 		if (selectedColor == 'style1') {
