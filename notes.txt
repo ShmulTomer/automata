@@ -21,4 +21,5 @@ Lowest Priority:
 - adjust angle anchor values
 - get rid of mid air arrows drawing
 - adjust self links and links look
+- adjust fonts, thicknesses, etc.
 - clean up codebase
