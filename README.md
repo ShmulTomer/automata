@@ -1,6 +1,9 @@
 # Automata / FSM Designer
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This is the source code for the Automata Designer used for Georgia Tech's CS 4510 Automata and Complexity. It is hosted using GitHub Pages, and you can visit it at: [drawautomata.xyz](https://drawautomata.xyz).
@@ -44,12 +47,11 @@ If you want to contribute to this tool, create a pull request (direct pushes to 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
-
 - Tomer Shmul
 - Matt Steele
 - Austin Morris
 - Akaash Dash
 
-
 ## License
+
 This project is licensed under the MIT License.

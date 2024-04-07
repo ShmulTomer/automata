@@ -1,202 +1,271 @@
-
-
 <!doctype html>
 <html>
-<head>
+  <head>
     <title>Automata Designer</title>
-    <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap");
 
-        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
+      body {
+        text-align: center;
+        background: #f5f5f5;
+        margin: 0;
+        padding: 0;
+        font:
+          14px "Roboto",
+          sans-serif;
+        color: #333;
+      }
 
-        body {
-            text-align: center;
-            background: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            font: 14px 'Roboto', sans-serif;
-            color: #333;
+      h1 {
+        font:
+          700 50px "Lato",
+          sans-serif; /* Updated to Lato */
+        margin: 20px 0;
+        color: #333; /* Dark grey color for better contrast */
+        text-align: center; /* Center align the text */
+        letter-spacing: 1px; /* Spacing between letters */
+      }
+
+      canvas {
+        display: block;
+        max-width: 800px;
+        background: white;
+        border: 1px solid #ddd;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin: 20px auto;
+      }
+
+      a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      a:hover {
+        color: #0056b3;
+      }
+
+      div {
+        margin: 30px auto;
+        text-align: left;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .error {
+        display: block;
+        color: #cc0000;
+        font-size: 20px;
+        line-height: 22px;
+        padding: 20px;
+      }
+
+      p {
+        margin: 20px 0;
+        line-height: 24px;
+        color: #666;
+      }
+
+      .center {
+        text-align: center;
+      }
+
+      textarea {
+        display: none;
+        width: 75%;
+        height: 400px;
+        margin: 0 auto;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 10px;
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        color: #333;
+      }
+
+      button.export {
+        display: inline-block; /* Aligns button for centering */
+        min-width: 200px;
+        padding: 10px 20px; /* Top & Bottom | Left & Right */
+        margin-top: 0px; /* Spacing from top */
+        margin: 0 7px;
+        height: 45px;
+        border: none; /* Removes border */
+        border-radius: 5px; /* Rounded corners */
+        background-color: #007bff; /* Green background */
+        color: white; /* White text */
+        font-size: 16px; /* Font size */
+        font-weight: bold;
+        cursor: pointer; /* Hand cursor on hover */
+        transition:
+          background-color 0.3s,
+          transform 0.3s; /* Smooth transition for hover effects */
+      }
+
+      button.export:hover {
+        background-color: #3399ff; /* Slightly darker green on hover */
+        transform: translateY(-2px); /* Subtle lift effect on hover */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+      }
+
+      button.clear {
+        background-color: #e30000;
+      }
+
+      button.clear:hover {
+        background-color: #ff3131;
+      }
+
+      button.export img {
+        filter: invert(100%);
+        height: 20px; /* Adjust as needed */
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+
+      .style-btn {
+        padding: 10px 20px;
+        margin: 0 10px;
+        border: 2px solid #d3d3d3; /* Adding a light grey border */
+        border-radius: 5px;
+        background-color: #fdfdfd;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .style-btn img {
+        width: 55px;
+        height: 55px;
+        background-color: transparent;
+      }
+
+      .style-btn:active,
+      .style-btn.active {
+        padding: 9px 19px;
+        border: 2px solid #aaa;
+        background-color: #e0e0e0;
+        box-shadow: 0 2px #888;
+        outline: none;
+      }
+
+      .style-btn:hover:not(.active) {
+        background-color: #e9e9e9;
+      }
+
+      .button-small {
+        padding: 10px 10px; /* Smaller padding */
+        font-size: 14px; /* Smaller font size */
+        background-color: #f0f0f0de; /* Lighter background */
+        color: #333; /* Dark text for contrast */
+        border: 1px solid #ccc; /* Light border */
+        border-radius: 3px; /* Slightly rounded corners */
+        margin: 1px 1px; /* Smaller margins */
+        box-shadow: none; /* No shadow for a flatter look */
+        transition:
+          background-color 0.3s,
+          box-shadow 0.3s; /* Transition for interactive effect */
+      }
+
+      .button-small:hover {
+        background-color: #e0e0e0; /* Slightly darker background on hover */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover for depth */
+      }
+
+      .toast {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+      }
+
+      .toast.show {
+        visibility: visible;
+        -webkit-animation:
+          fadein 0.5s,
+          fadeout 0.5s 2.5s;
+        animation:
+          fadein 0.5s,
+          fadeout 0.5s 2.5s;
+      }
+
+      @-webkit-keyframes fadein {
+        from {
+          bottom: 0;
+          opacity: 0;
         }
-
-        h1 {
-                font: 700 50px 'Lato', sans-serif; /* Updated to Lato */
-                margin: 20px 0;
-                color: #333; /* Dark grey color for better contrast */
-                text-align: center; /* Center align the text */
-                letter-spacing: 1px; /* Spacing between letters */
-            }
-
-
-        canvas {
-            display: block;
-            max-width: 800px;
-            background: white;
-            border: 1px solid #ddd;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            margin: 20px auto;
+        to {
+          bottom: 30px;
+          opacity: 1;
         }
+      }
 
-        a {
-            color: #007bff;
-            text-decoration: none;
-            transition: color 0.3s;
+      @keyframes fadein {
+        from {
+          bottom: 0;
+          opacity: 0;
         }
-
-        a:hover {
-            color: #0056b3;
+        to {
+          bottom: 30px;
+          opacity: 1;
         }
+      }
 
-        div {
-            margin: 30px auto;
-            text-align: left;
-            max-width: 800px;
-            padding: 0 20px;
+      @-webkit-keyframes fadeout {
+        from {
+          bottom: 30px;
+          opacity: 1;
         }
-
-        
-
-        .error {
-            display: block;
-            color: #cc0000;
-            font-size: 20px;
-            line-height: 22px;
-            padding: 20px;
+        to {
+          bottom: 0;
+          opacity: 0;
         }
+      }
 
-        p {
-            margin: 20px 0;
-            line-height: 24px;
-            color: #666;
+      @keyframes fadeout {
+        from {
+          bottom: 30px;
+          opacity: 1;
         }
-
-        .center {
-            text-align: center;
+        to {
+          bottom: 0;
+          opacity: 0;
         }
-
-        textarea {
-            display: none;
-            width: 75%;
-            height: 400px;
-            margin: 0 auto;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 10px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 14px;
-            color: #333;
-        }
-
-        
-
-        button.export {
-            display: inline-block; /* Aligns button for centering */
-            min-width: 200px;
-            padding: 10px 20px; /* Top & Bottom | Left & Right */
-            margin-top: 0px; /* Spacing from top */
-            margin: 0 7px;
-            height: 45px;
-            border: none; /* Removes border */
-            border-radius: 5px; /* Rounded corners */
-            background-color: #007BFF; /* Green background */
-            color: white; /* White text */
-            font-size: 16px; /* Font size */
-            font-weight: bold;
-            cursor: pointer; /* Hand cursor on hover */
-            transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
-        }
-
-        button.export:hover {
-            background-color: #3399FF; /* Slightly darker green on hover */
-            transform: translateY(-2px); /* Subtle lift effect on hover */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Shadow effect on hover */
-        }
-
-        button.clear {
-            background-color: #e30000;
-        }
-
-        button.clear:hover {
-            background-color: #ff3131;
-        }
-
-        button.export img {
-            filter: invert(100%);
-            height: 20px; /* Adjust as needed */
-            vertical-align: middle;
-            margin-right: 5px;
-        }
-
-
-        .style-btn {
-            padding: 10px 20px;
-            margin: 0 10px;
-            border: 2px solid #d3d3d3; /* Adding a light grey border */
-            border-radius: 5px;
-            background-color: #fdfdfd;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-
-        .style-btn img {
-            width: 55px;
-            height: 55px;
-            background-color: transparent;
-        }
-
-        .style-btn:active,
-        .style-btn.active {
-            padding: 9px 19px;
-            border: 2px solid #aaa;
-            background-color: #e0e0e0;
-            box-shadow: 0 2px #888;
-            outline: none;
-        }
-
-        .style-btn:hover:not(.active) {
-            background-color: #e9e9e9;
-        }
-
-        .button-small {
-            padding: 10px 10px; /* Smaller padding */
-            font-size: 14px; /* Smaller font size */
-            background-color: #f0f0f0de; /* Lighter background */
-            color: #333; /* Dark text for contrast */
-            border: 1px solid #ccc; /* Light border */
-            border-radius: 3px; /* Slightly rounded corners */
-            margin: 1px 1px; /* Smaller margins */
-            box-shadow: none; /* No shadow for a flatter look */
-            transition: background-color 0.3s, box-shadow 0.3s; /* Transition for interactive effect */
-        }
-
-        .button-small:hover {
-            background-color: #e0e0e0; /* Slightly darker background on hover */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow on hover for depth */
-        }
-
-
+      }
     </style>
-	<script src="fsm.js"></script>
-	<script>
+    <script src="fsm.js"></script>
+    <script>
+      /*
+       * base64.js - Base64 encoding and decoding functions
+       *
+       * See: http://developer.mozilla.org/en/docs/DOM:window.btoa
+       *      http://developer.mozilla.org/en/docs/DOM:window.atob
+       *
+       * Copyright (c) 2007, David Lindquist <david.lindquist@gmail.com>
+       * Released under the MIT license
+       */
 
-/*
- * base64.js - Base64 encoding and decoding functions
- *
- * See: http://developer.mozilla.org/en/docs/DOM:window.btoa
- *      http://developer.mozilla.org/en/docs/DOM:window.atob
- *
- * Copyright (c) 2007, David Lindquist <david.lindquist@gmail.com>
- * Released under the MIT license
- */
-
-if (typeof btoa == 'undefined') {
-    function btoa(str) {
-        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-        var encoded = [];
-        var c = 0;
-        while (c < str.length) {
+      if (typeof btoa == "undefined") {
+        function btoa(str) {
+          var chars =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+          var encoded = [];
+          var c = 0;
+          while (c < str.length) {
             var b0 = str.charCodeAt(c++);
             var b1 = str.charCodeAt(c++);
             var b2 = str.charCodeAt(c++);
@@ -204,62 +273,116 @@ if (typeof btoa == 'undefined') {
             var i0 = (buf & (63 << 18)) >> 18;
             var i1 = (buf & (63 << 12)) >> 12;
             var i2 = isNaN(b1) ? 64 : (buf & (63 << 6)) >> 6;
-            var i3 = isNaN(b2) ? 64 : (buf & 63);
+            var i3 = isNaN(b2) ? 64 : buf & 63;
             encoded[encoded.length] = chars.charAt(i0);
             encoded[encoded.length] = chars.charAt(i1);
             encoded[encoded.length] = chars.charAt(i2);
             encoded[encoded.length] = chars.charAt(i3);
+          }
+          return encoded.join("");
         }
-        return encoded.join('');
-    }
-}
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Automata Designer</h1>
+    <canvas id="canvas" width="800" height="600">
+      <span class="error"
+        >Your browser does not support<br />the HTML5 &lt;canvas&gt;
+        element</span
+      >
+    </canvas>
+    <div>
+      <!-- <p class="center">Export as: <a href="javascript:saveAsPNG()">PNG</a> | <a href="javascript:saveAsSVG()">SVG</a> | <a href="javascript:saveAsLaTeX()">LaTeX</a></p> -->
+      <p class="center">
+        <button
+          onclick="setColor('default')"
+          id="defaultButton"
+          class="style-btn"
+        >
+          <img src="images/DefaultStyle.png" alt="Default" />
+        </button>
+        <button
+          onclick="setColor('style1')"
+          id="style1Button"
+          class="style-btn"
+        >
+          <img src="images/Style1.png" alt="Blue/Green" />
+        </button>
+        <button
+          onclick="setColor('style2')"
+          id="style2Button"
+          class="style-btn"
+        >
+          <img src="images/Style2.png" alt="Red/Orange" />
+        </button>
+      </p>
 
-	</script>
-</head><body>
-	<h1>Automata Designer</h1>
-	<canvas id="canvas" width="800" height="600">
-		<span class="error">Your browser does not support<br>the HTML5 &lt;canvas&gt; element</span>
-	</canvas>
-	<div>
-		<!-- <p class="center">Export as: <a href="javascript:saveAsPNG()">PNG</a> | <a href="javascript:saveAsSVG()">SVG</a> | <a href="javascript:saveAsLaTeX()">LaTeX</a></p> -->
-        <p class="center">
-            <button onclick="setColor('default')" id="defaultButton" class="style-btn"><img src="images/DefaultStyle.png" alt="Default" /></button>
-            <button onclick="setColor('style1')" id="style1Button" class="style-btn"><img src="images/Style1.png" alt="Blue/Green" /></button>
-            <button onclick="setColor('style2')" id="style2Button" class="style-btn"><img src="images/Style2.png" alt="Red/Orange" /></button>
-        </p>
-        
-        
-        
-        <p class="center">
-
-            <a href="javascript:saveAsPNG()"><button class="export">Export as PNG</button></a>
-            <a href="javascript:saveAsLaTeX()">
-                <button class="export">
-                    Export as <img src="images/LaTeX_logo.png" alt="LaTeX Logo" />
-                </button>
-            </a>
-            <button onclick="clearAll()" id="clearButton" class="export clear">Clear Everything</button>
-            
+      <p class="center">
+        <a href="javascript:saveAsPNG()"
+          ><button class="export">Export as PNG</button></a
+        >
+        <a href="javascript:saveAsLaTeX()">
+          <button class="export">
+            Export as <img src="images/LaTeX_logo.png" alt="LaTeX Logo" />
+          </button>
+        </a>
+        <button onclick="clearAll()" id="clearButton" class="export clear">
+          Clear Everything
+        </button>
+      </p>
+      <p class="center">
+        <button
+          id="copyToClipboard"
+          class="button-small extra-button"
+          style="display: none"
+          onclick="copyToClipboard()"
+        >
+          Copy to Clipboard
+        </button>
+        <button
+          id="saveAsTex"
+          class="button-small extra-button"
+          style="display: none"
+          onclick="saveAsTex()"
+        >
+          Save as .tex
+        </button>
+      </p>
+      <div id="toast" class="toast">Text copied to clipboard</div>
+      <textarea id="output"></textarea>
+      <p>
+        The big white box above is the automata designer.&nbsp; Here's how to
+        use it:
+      </p>
+      <ul>
+        <li><b>Add a state:</b> double-click on the canvas</li>
+        <li><b>Add an arrow:</b> shift-drag on the canvas</li>
+        <li><b>Move something:</b> drag it around</li>
+        <li>
+          <b>Delete something:</b> click it and press the delete key (not the
+          backspace key; on Mac use fn + delete)
+        </li>
+      </ul>
+      <ul>
+        <li><b>Make accept state:</b> double-click on an existing state</li>
+        <li>
+          <b>Type numeric subscript:</b> put an underscore before the number
+          (like "S_0")
+        </li>
+        <li>
+          <b>Type greek letter:</b> put a backslash before it (like "\beta")
+        </li>
+        <li>
+          <b>Type special symbols:</b> put a backslash before it (like
+          "\rightarrow", "\sqcup", or "\emptyset")
+        </li>
+      </ul>
+    </div>
+    <p>
+      Created by <a href="http://madebyevan.com/">Evan Wallace</a> in 2010.
+      <a href="https://github.com/ShmulTomer/automata">Updated</a> in 2024 for
+      Georgia Tech's CS 4510.
     </p>
-    <p class="center">
-        <button id="copyToClipboard" class="button-small extra-button" style="display:none;" onclick="copyToClipboard()">Copy to Clipboard</button>
-        <button id="saveAsTex" class="button-small extra-button" style="display:none;" onclick="saveAsTex()">Save as .tex</button>
-            
-
-    </p>
-        <textarea id="output"></textarea>
-		<p>The big white box above is the automata designer.&nbsp; Here's how to use it:</p>
-		<ul>
-			<li><b>Add a state:</b> double-click on the canvas</li>
-			<li><b>Add an arrow:</b> shift-drag on the canvas</li>
-			<li><b>Move something:</b> drag it around</li>
-			<li><b>Delete something:</b> click it and press the delete key (not the backspace key; on Mac use fn + delete)</li>
-		</ul><ul>
-			<li><b>Make accept state:</b> double-click on an existing state</li>
-			<li><b>Type numeric subscript:</b> put an underscore before the number (like "S_0")</li>
-			<li><b>Type greek letter:</b> put a backslash before it (like "\beta")</li>
-            <li><b>Type special symbols:</b> put a backslash before it (like "\rightarrow", "\sqcup", or "\emptyset")</li>
-		</ul>
-	</div>
-	<p>Created by <a href="http://madebyevan.com/">Evan Wallace</a> in 2010. <a href="https://github.com/ShmulTomer/automata">Updated</a> in 2024 for Georgia Tech's CS 4510.</p>
-</body></html>
+  </body>
+</html>
