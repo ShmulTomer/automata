@@ -4,10 +4,7 @@ Higher Priority:
 - initial state functionality
     - not sure best way to do this, maybe a triple click, also need way to display this
     - if selectedColor is not default, then not needed?
-- clear everything button functionality
-- automatic copying to clipboard
-    - add a button to copy to clipboard
-    - add a button to download as .tex file
+
 
 Lower Priority:
 - symbol functionality (rightarrow, leftarrow, sqcup, emptyset)
