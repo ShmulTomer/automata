@@ -1,4 +1,4 @@
-# Automata / Finite State Machine Designer
+# Automata / FSM Designer
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
@@ -9,7 +9,7 @@ This is the source code for the Automata Designer used for Georgia Tech's CS 451
 
 This tool is based on the already excellent [website by Evan Wallace](http://madebyevan.com/fsm/), and has been updated to use the newer Tikz Automata library as well as with additional functionality.
 
-## Contributors ✨
+## Contributors
 
 If you want to contribute to this tool, create a pull request (direct pushes to main are blocked).
 
