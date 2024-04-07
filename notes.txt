@@ -2,19 +2,20 @@
 
 Higher Priority:
 - initial state functionality
+    - not sure best way to do this, maybe a triple click, also need way to display this
 
 Lower Priority:
-- symbol functionality (and add $$ around them)
-    - add $$ around symbols
-- color changing functionality
+- symbol functionality (rightarrow, leftarrow, sqcup, emptyset)
+    - add $$ around symbols so they export to latex properly
+- node color changing functionality
     - make it work correctly
     - accepting state should be visible
     - better buttons
 - clear everything button functionality 
 - add DNS 
 - make sure backup and cookies work with new stuff! (like with new properties and colors)
-- what to do about circles increasing in size?
-- make accepting states more noticeable
+- what to do about circles increasing in size with a lot of text?
+- make accepting states more noticeable when exported to LaTeX
 
 Lowest Priority:
 - adjust angle anchor values
