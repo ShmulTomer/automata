@@ -3,15 +3,17 @@
 Higher Priority:
 - initial state functionality
     - not sure best way to do this, maybe a triple click, also need way to display this
+    - if selectedColor is not default, then not needed?
+- clear everything button functionality
+- automatic copying to clipboard
+    - add a button to copy to clipboard
+    - add a button to download as .tex file
 
 Lower Priority:
 - symbol functionality (rightarrow, leftarrow, sqcup, emptyset)
     - add $$ around symbols so they export to latex properly
-- node color changing functionality
-    - make it work correctly (doesn't update at first till Canvas is hovered)
-    - accepting state should be visible
-    - better buttons
-- clear everything button functionality 
+- tweak color changing functionality
+    - determine which styling we want + edit buttons to show
 - add DNS 
 - make sure backup and cookies work with new stuff! (like with new properties and colors)
 - what to do about circles increasing in size with a lot of text?
@@ -22,4 +24,5 @@ Lowest Priority:
 - get rid of mid air arrows drawing
 - adjust self links and links look
 - adjust fonts, thicknesses, etc.
+- clean up UI
 - clean up codebase

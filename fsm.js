@@ -25,12 +25,68 @@
  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  OTHER DEALINGS IN THE SOFTWARE.
 */
+function copyToClipboard() {
+    var text = document.getElementById("output").value;
+    navigator.clipboard.writeText(text).then(function() {
+        alert("Text copied to clipboard");
+    }, function(err) {
+        console.error('Could not copy text: ', err);
+    });
+}
+
+function saveAsTex() {
+    var text = document.getElementById("output").value;
+    var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "automata.tex";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+
 
 var selectedColor = 'default'; // Default value
 
+
 function setColor(color) {
     selectedColor = color;
+    
+    // Array of button IDs
+    var buttonIds = ['defaultButton', 'style1Button', 'style2Button'];
+
+    // Remove active class from all style buttons
+    buttonIds.forEach(function(buttonId) {
+        document.getElementById(buttonId).classList.remove('active');
+    });
+    
+    // Add active class to the clicked button
+    var buttonId = color + 'Button';
+    document.getElementById(buttonId).classList.add('active');
+
+	draw();
 }
+
+
+function clearAll() {
+
+	if (confirm("Are you sure you want to clear everything? This cannot be undone.")) {
+		// Clear the arrays
+		nodes = [];
+		links = [];
+
+		// Reset selected object
+		selectedObject = null;
+
+		// Redraw the canvas
+		draw();
+	}
+
+}
+
 
 // draw using this instead of a canvas and call toLaTeX() afterward
 function ExportAsLaTeX() {
@@ -50,8 +106,11 @@ function ExportAsLaTeX() {
 					 '\\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=0.2';
 	
 		// Add the style based on the selected color
-		if (selectedColor !== 'default') {
-			var colorStyle = ', every state/.style={fill,draw=none,' + selectedColor + ',text=white,circular drop shadow}';
+		if (selectedColor == 'style1') {
+			var colorStyle = ', every state/.style={fill,draw=none,blue,text=white}, accepting/.style ={green!50!black,text=white}]';
+			header += colorStyle;
+		} else if (selectedColor == 'style2') {
+			var colorStyle = ', every state/.style={fill,draw=none,red,text=white}, accepting/.style ={orange!80,text=white}]';
 			header += colorStyle;
 		}
 	
@@ -581,21 +640,49 @@ Node.prototype.setAnchorPoint = function(x, y) {
 
 Node.prototype.draw = function(c) {
     // Set fill style based on selectedColor
-    c.fillStyle = (selectedColor !== 'default') ? selectedColor : 'white';
+	if (selectedColor === 'default') {
+		normalColor = 'white'
+		acceptColor = 'white'
+		initialColor = 'white'
+		textColor = 'black'
+	} else if (selectedColor == 'style1') {
+		normalColor = 'blue'
+		acceptColor = 'green'
+		initialColor = 'blue'
+		textColor = 'white'
+	} else if (selectedColor == 'style2') {
+		normalColor = 'red'
+		acceptColor = 'orange'
+		initialColor = 'red'
+		textColor = 'white'
+	}
+
+
+	if (this.isAcceptState) {
+		c.fillStyle = acceptColor
+	} else if (this.isInitial) {
+		c.fillStyle = initialColor
+	} else {
+		c.fillStyle = normalColor
+	}
+    
 
     // Draw the circle
     c.beginPath();
+	if (selectedColor != 'default') {
+		c.strokeStyle = c.fillStyle
+	}
     c.arc(this.x, this.y, nodeRadius, 0, 2 * Math.PI, false);
     c.fill();
     c.stroke();
 
-	c.fillStyle = (selectedColor !== 'default') ? 'white' : 'black';
+	c.fillStyle = textColor
 
 	// draw the text
 	drawText(c, this.text, this.x, this.y, null, selectedObject == this);
 
 	// draw a double circle for an accept state
-	if(this.isAcceptState) {
+	if(this.isAcceptState && selectedColor === 'default') {
 		c.beginPath();
 		c.arc(this.x, this.y, nodeRadius - 6, 0, 2 * Math.PI, false);
 		c.stroke();
@@ -1250,4 +1337,8 @@ function saveAsLaTeX() {
 	selectedObject = oldSelectedObject;
 	var texData = exporter.toLaTeX();
 	output(texData);
+
+	document.getElementById("copyToClipboard").style.display = "inline-block";
+    document.getElementById("saveAsTex").style.display = "inline-block";
+
 }

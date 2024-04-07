@@ -119,6 +119,48 @@
             margin-right: 5px;
         }
 
+
+        .style-btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            background-color: #fdfdfd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .style-btn:active,
+        .style-btn.active {
+            padding: 9px 19px;
+            border: 2px solid #aaa;
+            background-color: #e0e0e0;
+            box-shadow: 0 2px #888;
+            outline: none;
+        }
+
+        .style-btn:hover:not(.active) {
+            background-color: #e9e9e9;
+        }
+
+        .button-small {
+            padding: 10px 10px; /* Smaller padding */
+            font-size: 14px; /* Smaller font size */
+            background-color: #f0f0f0de; /* Lighter background */
+            color: #333; /* Dark text for contrast */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 3px; /* Slightly rounded corners */
+            margin: 1px 1px; /* Smaller margins */
+            box-shadow: none; /* No shadow for a flatter look */
+            transition: background-color 0.3s, box-shadow 0.3s; /* Transition for interactive effect */
+        }
+
+        .button-small:hover {
+            background-color: #e0e0e0; /* Slightly darker background on hover */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow on hover for depth */
+        }
+
+
     </style>
 	<script src="fsm.js"></script>
 	<script>
@@ -165,21 +207,30 @@ if (typeof btoa == 'undefined') {
 	<div>
 		<!-- <p class="center">Export as: <a href="javascript:saveAsPNG()">PNG</a> | <a href="javascript:saveAsSVG()">SVG</a> | <a href="javascript:saveAsLaTeX()">LaTeX</a></p> -->
         <p class="center">
-            <button onclick="setColor('default')">Default</button>
-            <button onclick="setColor('blue')">Blue</button>
-            <button onclick="setColor('green')">Green</button>
-            <button onclick="setColor('orange')">Orange</button>
-            <button onclick="setColor('red')">Red</button>
+            <button onclick="setColor('default')" id="defaultButton" class="style-btn">Default</button>
+            <button onclick="setColor('style1')" id="style1Button" class="style-btn">Blue/Green</button>
+            <button onclick="setColor('style2')" id="style2Button" class="style-btn">Red/Orange</button>
         </p>
         
+        
+        
         <p class="center">
+            <button onclick="clearAll()" id="clearButton" class="export">Clear Everything</button>
+
             <a href="javascript:saveAsPNG()"><button class="export">Export as PNG</button></a>
             <a href="javascript:saveAsLaTeX()">
                 <button class="export">
                     Export as <img src="LaTeX_logo.png" alt="LaTeX Logo" />
                 </button>
+                
             </a>
             
+    </p>
+    <p class="center">
+        <button id="copyToClipboard" class="button-small extra-button" style="display:none;" onclick="copyToClipboard()">Copy to Clipboard</button>
+        <button id="saveAsTex" class="button-small extra-button" style="display:none;" onclick="saveAsTex()">Save as .tex</button>
+            
+
     </p>
         <textarea id="output"></textarea>
 		<p>The big white box above is the FSM designer.&nbsp; Here's how to use it:</p>
