@@ -90,8 +90,6 @@ function clearAll() {
 
 // draw using this instead of a canvas and call toLaTeX() afterward
 function ExportAsLaTeX() {
-	console.log("HERE ")
-	console.log(selectedColor)
 	this._texData = '';
 
 	this._points = [];
@@ -645,9 +643,9 @@ Node.prototype.setAnchorPoint = function(x, y) {
 Node.prototype.draw = function(c) {
     // Set fill style based on selectedColor
 	if (selectedColor === 'default') {
-		normalColor = 'white'
-		acceptColor = 'white'
-		initialColor = 'white'
+		normalColor = 'transparent'
+		acceptColor = 'transparent'
+		initialColor = 'transparent'
 		textColor = 'black'
 	} else if (selectedColor == 'style1') {
 		normalColor = 'blue'
