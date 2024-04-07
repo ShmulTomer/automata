@@ -42,3 +42,4 @@ This tool is based on the already excellent [website by Evan Wallace](http://mad
 
 
 ## License
+This project is licensed under the MIT License.
