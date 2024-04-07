@@ -112,6 +112,14 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Shadow effect on hover */
         }
 
+        button.clear {
+            background-color: #e30000;
+        }
+
+        button.clear:hover {
+            background-color: #ff3131;
+        }
+
         button.export img {
             filter: invert(100%);
             height: 20px; /* Adjust as needed */
@@ -215,15 +223,14 @@ if (typeof btoa == 'undefined') {
         
         
         <p class="center">
-            <button onclick="clearAll()" id="clearButton" class="export">Clear Everything</button>
 
             <a href="javascript:saveAsPNG()"><button class="export">Export as PNG</button></a>
             <a href="javascript:saveAsLaTeX()">
                 <button class="export">
                     Export as <img src="LaTeX_logo.png" alt="LaTeX Logo" />
                 </button>
-                
             </a>
+            <button onclick="clearAll()" id="clearButton" class="export clear">Clear Everything</button>
             
     </p>
     <p class="center">
