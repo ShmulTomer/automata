@@ -136,7 +136,7 @@ function ExportAsLaTeX() {
 			if (node.isAcceptState) stateOptions.push('accepting');
 			var stateOptionsStr = stateOptions.length > 0 ? ',' + stateOptions.join(',') + '' : '';
 			latexBody += '\\node[state' + stateOptionsStr + '] (' + node.id + ') at (' + 
-						 fixed(node.x * this._scale, 2) + ',' + fixed(-node.y * this._scale, 2) + ') {' + node.text + '};\n';
+						 fixed(node.x * this._scale, 2) + ',' + fixed(-node.y * this._scale, 2) + ') {$' + node.text + '$};\n';
 		}
 
 
@@ -155,10 +155,10 @@ function ExportAsLaTeX() {
 				} else if (link.anchorAngle > -pi / 4 && link.anchorAngle < pi / 4) {
 					loop = "right";
 				}
-				latexBody += '\\path[->] (' + link.node.id + ') edge[loop ' + loop + '] node {' + link.text + '} ();\n';
+				latexBody += '\\path[->] (' + link.node.id + ') edge[loop ' + loop + '] node {$' + link.text + '$} ();\n';
 			} else if (link.perpendicularPart === 0) {
 				// Straight link
-				latexBody += '\\path[->] (' + link.nodeA.id + ') edge node {' + link.text + '} (' + link.nodeB.id + ');\n';
+				latexBody += '\\path[->] (' + link.nodeA.id + ') edge node {$' + link.text + '$} (' + link.nodeB.id + ');\n';
 			} else {
 				// Curved link
 				console.log(link)
