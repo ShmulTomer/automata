@@ -77,34 +77,34 @@ function setColor(color) {
 
 function clearAll(noAlert = false) {
   if (!noAlert) {
-	if (
-		confirm("Are you sure you want to clear everything? This cannot be undone.")
-	  ) {
-		// Clear the arrays
-		nodes = [];
-		links = [];
-	
-		// Reset selected object
-		selectedObject = null;
-		globalCounter = 0;
-	
-		// Redraw the canvas
-		draw();
-	  } 
+    if (
+      confirm(
+        "Are you sure you want to clear everything? This cannot be undone.",
+      )
+    ) {
+      // Clear the arrays
+      nodes = [];
+      links = [];
+
+      // Reset selected object
+      selectedObject = null;
+      globalCounter = 0;
+
+      // Redraw the canvas
+      draw();
+    }
   } else {
-	// Clear the arrays
-	nodes = [];
-	links = [];
+    // Clear the arrays
+    nodes = [];
+    links = [];
 
-	// Reset selected object
-	selectedObject = null;
-	globalCounter = 0;
+    // Reset selected object
+    selectedObject = null;
+    globalCounter = 0;
 
-	// Redraw the canvas
-	draw();
+    // Redraw the canvas
+    draw();
   }
-	
-	
 }
 
 // draw using this instead of a canvas and call toLaTeX() afterward
@@ -844,8 +844,8 @@ Node.prototype.draw = function (c) {
     initialColor = "red";
     textColor = "white";
   } else {
-	selectedColor = 'default';
-	normalColor = "transparent";
+    selectedColor = "default";
+    normalColor = "transparent";
     acceptColor = "transparent";
     initialColor = "transparent";
     textColor = "black";
@@ -1014,61 +1014,64 @@ TemporaryLink.prototype.draw = function (c) {
 };
 
 function saveAsJSON() {
-	var data = createBackup();
-    const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'backup.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+  var data = createBackup();
+  const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "backup.json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 function uploadJSON() {
-	if (confirm("Are you sure you want to upload this JSON? This action will clear all current nodes.")) {
-		const input = document.getElementById('fileInput');
-		const file = input.files[0];
-		if (file) {
-			const reader = new FileReader();
-			clearAll(noAlert = true);
-			reader.onload = function(event) {
-				const data = JSON.parse(event.target.result);
-				console.log(data);
-				restoreBackup(data);
-				draw();
-				input.value = '';
-			};
-			reader.readAsText(file);
-		}
-	}
-    
+  if (
+    confirm(
+      "Are you sure you want to upload this JSON? This action will clear all current nodes.",
+    )
+  ) {
+    const input = document.getElementById("fileInput");
+    const file = input.files[0];
+    if (file) {
+      const reader = new FileReader();
+      clearAll((noAlert = true));
+      reader.onload = function (event) {
+        const data = JSON.parse(event.target.result);
+        console.log(data);
+        restoreBackup(data);
+        draw();
+        input.value = "";
+      };
+      reader.readAsText(file);
+    }
+  }
 }
 
 function restoreBackup(backupData) {
-	console.log("HERE 1");
+  console.log("HERE 1");
   if (!localStorage || !JSON) {
     return;
   }
   console.log("HERE 2");
 
   try {
-	console.log("HERE 3");
+    console.log("HERE 3");
     var backup = backupData ? backupData : JSON.parse(localStorage["fsm"]);
-	console.log(backup);
-	console.log("HERE 4");
+    console.log(backup);
+    console.log("HERE 4");
 
-	selectedColor = backup.style;
-	globalCounter = backup.globalCounter;
+    selectedColor = backup.style;
+    globalCounter = backup.globalCounter;
 
     for (var i = 0; i < backup.nodes.length; i++) {
       var backupNode = backup.nodes[i];
       var node = new Node(backupNode.x, backupNode.y);
       node.isAcceptState = backupNode.isAcceptState;
-	  node.isInitial = backupNode.isInitial;
+      node.isInitial = backupNode.isInitial;
       node.text = backupNode.text;
-	  node.id = backupNode.id;
+      node.id = backupNode.id;
       nodes.push(node);
     }
     for (var i = 0; i < backup.links.length; i++) {
@@ -1100,58 +1103,58 @@ function restoreBackup(backupData) {
 }
 
 function createBackup() {
-	var backup = {
-		nodes: [],
-		links: [],
-		style: selectedColor,
-		globalCounter: globalCounter,
-	  };
-	  for (var i = 0; i < nodes.length; i++) {
-		var node = nodes[i];
-		var backupNode = {
-		  x: node.x,
-		  y: node.y,
-		  text: node.text,
-		  isAcceptState: node.isAcceptState,
-		  id: node.id,
-		  isInitial: node.isInitial,
-		};
-		backup.nodes.push(backupNode);
-	  }
-	  for (var i = 0; i < links.length; i++) {
-		var link = links[i];
-		var backupLink = null;
-		if (link instanceof SelfLink) {
-		  backupLink = {
-			type: "SelfLink",
-			node: nodes.indexOf(link.node),
-			text: link.text,
-			anchorAngle: link.anchorAngle,
-		  };
-		} else if (link instanceof StartLink) {
-		  backupLink = {
-			type: "StartLink",
-			node: nodes.indexOf(link.node),
-			text: link.text,
-			deltaX: link.deltaX,
-			deltaY: link.deltaY,
-		  };
-		} else if (link instanceof Link) {
-		  backupLink = {
-			type: "Link",
-			nodeA: nodes.indexOf(link.nodeA),
-			nodeB: nodes.indexOf(link.nodeB),
-			text: link.text,
-			lineAngleAdjust: link.lineAngleAdjust,
-			parallelPart: link.parallelPart,
-			perpendicularPart: link.perpendicularPart,
-		  };
-		}
-		if (backupLink != null) {
-		  backup.links.push(backupLink);
-		}
-	  }
-	  return backup;	
+  var backup = {
+    nodes: [],
+    links: [],
+    style: selectedColor,
+    globalCounter: globalCounter,
+  };
+  for (var i = 0; i < nodes.length; i++) {
+    var node = nodes[i];
+    var backupNode = {
+      x: node.x,
+      y: node.y,
+      text: node.text,
+      isAcceptState: node.isAcceptState,
+      id: node.id,
+      isInitial: node.isInitial,
+    };
+    backup.nodes.push(backupNode);
+  }
+  for (var i = 0; i < links.length; i++) {
+    var link = links[i];
+    var backupLink = null;
+    if (link instanceof SelfLink) {
+      backupLink = {
+        type: "SelfLink",
+        node: nodes.indexOf(link.node),
+        text: link.text,
+        anchorAngle: link.anchorAngle,
+      };
+    } else if (link instanceof StartLink) {
+      backupLink = {
+        type: "StartLink",
+        node: nodes.indexOf(link.node),
+        text: link.text,
+        deltaX: link.deltaX,
+        deltaY: link.deltaY,
+      };
+    } else if (link instanceof Link) {
+      backupLink = {
+        type: "Link",
+        nodeA: nodes.indexOf(link.nodeA),
+        nodeB: nodes.indexOf(link.nodeB),
+        text: link.text,
+        lineAngleAdjust: link.lineAngleAdjust,
+        parallelPart: link.parallelPart,
+        perpendicularPart: link.perpendicularPart,
+      };
+    }
+    if (backupLink != null) {
+      backup.links.push(backupLink);
+    }
+  }
+  return backup;
 }
 
 function saveBackup() {
@@ -1160,7 +1163,7 @@ function saveBackup() {
   }
 
   backup = createBackup();
-  
+
   localStorage["fsm"] = JSON.stringify(backup);
 }
 

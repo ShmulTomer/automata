@@ -23,12 +23,14 @@
 
       h1 {
         font:
-          700 50px "Lato",
-          sans-serif; /* Updated to Lato */
-        margin: 20px 0;
-        color: #333; /* Dark grey color for better contrast */
-        text-align: center; /* Center align the text */
-        letter-spacing: 1px; /* Spacing between letters */
+          700 50px "Montserrat",
+          sans-serif; /* Use Montserrat for a modern look */
+        margin-top: 23px;
+        margin-bottom: 20px;
+        color: #333; /* Maintain dark grey for contrast */
+        text-align: center; /* Keep the title centered */
+        letter-spacing: 2px; /* Slightly increase letter spacing for a cleaner look */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle text shadow for depth */
       }
 
       canvas {
@@ -175,6 +177,48 @@
       .button-small:hover {
         background-color: #e0e0e0; /* Slightly darker background on hover */
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover for depth */
+      }
+
+      .instruction-section {
+        font-family: "Roboto", sans-serif;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 4px 25px;
+        margin-top: 30px;
+      }
+
+      .instruction-section h2 {
+        color: #007bff;
+        margin-bottom: 20px;
+      }
+
+      .instruction-section ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .instruction-section li {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        position: relative;
+      }
+
+      .instruction-section li:before {
+        content: "•";
+        color: #007bff;
+        font-size: 20px;
+        position: absolute;
+        left: 0;
+      }
+
+      .instruction-section a {
+        color: #007bff;
+        text-decoration: underline;
+      }
+
+      .instruction-section a:hover {
+        color: #0056b3;
       }
 
       .toast {
@@ -351,40 +395,45 @@
       </p>
       <div id="toast" class="toast">Text copied to clipboard</div>
       <textarea id="output"></textarea>
-      <p>
-        The big white box above is the automata designer.&nbsp; Here's how to
-        use it:
-      </p>
-      <ul>
-        <li><b>Add a state:</b> double-click on the canvas</li>
-        <li><b>Add an arrow:</b> shift-drag on the canvas</li>
-        <li><b>Move something:</b> drag it around</li>
-        <li>
-          <b>Delete something:</b> click it and press the delete key (not the
-          backspace key; on Mac use fn + delete)
-        </li>
-      </ul>
-      <ul>
-        <li><b>Make accept state:</b> double-click on an existing state</li>
-        <li>
-          <b>Type numeric subscript:</b> put an underscore before the number
-          (like "S_0")
-        </li>
-        <li>
-          <b>Type greek letter:</b> put a backslash before it (like "\beta")
-        </li>
-        <li>
-          <b>Type special symbols:</b> put a backslash before it (like
-          "\rightarrow", "\sqcup", or "\emptyset")
-        </li>
-        <li>
-            <b>Backup/restore Diagram:</b> 
-            <a href="javascript:saveAsJSON()" style="margin-right: 10px;">Download JSON</a>
-            <label for="fileInput" style="margin-right: 5px;">Upload JSON</label>
-            <input type="file" id="fileInput" accept=".json" onchange="uploadJSON()" style="display: none;">
-            <button onclick="document.getElementById('fileInput').click()">Upload</button>
-        </li>
-      </ul>
+
+      <div class="instruction-section">
+        <h2>How to Use the Automata Designer</h2>
+        <ul>
+          <li><b>Add a state:</b> Double-click on the canvas.</li>
+          <li><b>Add an arrow:</b> Shift-drag on the canvas.</li>
+          <li><b>Move something:</b> Drag it around.</li>
+          <li>
+            <b>Delete something:</b> Click it and press the delete key (not the
+            backspace key; on Mac use fn + delete).
+          </li>
+          <li><b>Make accept state:</b> Double-click on an existing state.</li>
+          <li>
+            <b>Type numeric subscript:</b> Put an underscore before the number
+            (like "S_0").
+          </li>
+          <li>
+            <b>Type Greek letter:</b> Put a backslash before it (like "\beta").
+          </li>
+          <li>
+            <b>Type special symbols:</b> Put a backslash before it (like
+            "\rightarrow", "\sqcup", or "\emptyset").
+          </li>
+          <li>
+            <b>Backup/restore Diagram:</b>
+            Download JSON <a href="javascript:saveAsJSON()">here</a> or upload
+            <a href="#" onclick="document.getElementById('fileInput').click()"
+              >here</a
+            >.
+            <input
+              type="file"
+              id="fileInput"
+              accept=".json"
+              onchange="uploadJSON()"
+              style="display: none"
+            />
+          </li>
+        </ul>
+      </div>
     </div>
     <p>
       Created by <a href="http://madebyevan.com/">Evan Wallace</a> in 2010.
