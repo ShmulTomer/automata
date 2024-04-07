@@ -96,7 +96,6 @@
             padding: 10px 20px; /* Top & Bottom | Left & Right */
             margin-top: 0px; /* Spacing from top */
             height: 45px;
-            gap: 5px;
             border: none; /* Removes border */
             border-radius: 5px; /* Rounded corners */
             background-color: #007BFF; /* Green background */
@@ -166,6 +165,14 @@ if (typeof btoa == 'undefined') {
 	<div>
 		<!-- <p class="center">Export as: <a href="javascript:saveAsPNG()">PNG</a> | <a href="javascript:saveAsSVG()">SVG</a> | <a href="javascript:saveAsLaTeX()">LaTeX</a></p> -->
         <p class="center">
+            <button onclick="setColor('default')">Default</button>
+            <button onclick="setColor('blue')">Blue</button>
+            <button onclick="setColor('green')">Green</button>
+            <button onclick="setColor('orange')">Orange</button>
+            <button onclick="setColor('red')">Red</button>
+        </p>
+        
+        <p class="center">
             <a href="javascript:saveAsPNG()"><button class="export">Export as PNG</button></a>
             <a href="javascript:saveAsLaTeX()">
                 <button class="export">
@@ -180,11 +187,12 @@ if (typeof btoa == 'undefined') {
 			<li><b>Add a state:</b> double-click on the canvas</li>
 			<li><b>Add an arrow:</b> shift-drag on the canvas</li>
 			<li><b>Move something:</b> drag it around</li>
-			<li><b>Delete something:</b> click it and press the delete key (not the backspace key)</li>
+			<li><b>Delete something:</b> click it and press the delete key (not the backspace key; on Mac use fn + delete)</li>
 		</ul><ul>
 			<li><b>Make accept state:</b> double-click on an existing state</li>
 			<li><b>Type numeric subscript:</b> put an underscore before the number (like "S_0")</li>
 			<li><b>Type greek letter:</b> put a backslash before it (like "\beta")</li>
+            <li><b>Type special symbols:</b> put a backslash before it (like "\rightarrow", "\sqcup", or "\emptyset")</li>
 		</ul>
 	</div>
 	<p>Created by <a href="http://madebyevan.com/">Evan Wallace</a> in 2010. Updated in 2024.</p>

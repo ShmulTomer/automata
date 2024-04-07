@@ -26,9 +26,16 @@
  OTHER DEALINGS IN THE SOFTWARE.
 */
 
+var selectedColor = 'default'; // Default value
+
+function setColor(color) {
+    selectedColor = color;
+}
+
 // draw using this instead of a canvas and call toLaTeX() afterward
 function ExportAsLaTeX() {
 	console.log("HERE ")
+	console.log(selectedColor)
 	this._texData = '';
 
 	this._points = [];
@@ -36,21 +43,27 @@ function ExportAsLaTeX() {
 	this._scale = 0.1; // to convert pixels to document space (TikZ breaks if the numbers get too big, above 500?)
 
 	this.toLaTeX = function() {
-        // Include the TikZ Automata and Positioning libraries
-        var header = '\\documentclass[12pt]{article}\n' +
-                     '\\usepackage{tikz}\n' +
-                     '\\usetikzlibrary{automata, positioning}\n' +
-                     '\\begin{document}\n' +
-                     '\\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=0.2]\n';
-
-        // Generate the LaTeX body for nodes and links
-        var body = this.generateLaTeXBody();
-
-        var footer = '\\end{tikzpicture}\n' +
-                     '\\end{document}\n';
-
-        return header + body + footer;
-    };
+		var header = '\\documentclass[12pt]{article}\n' +
+					 '\\usepackage{tikz}\n' +
+					 '\\usetikzlibrary{automata, positioning}\n' +
+					 '\\begin{document}\n' +
+					 '\\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=0.2';
+	
+		// Add the style based on the selected color
+		if (selectedColor !== 'default') {
+			var colorStyle = ', every state/.style={fill,draw=none,' + selectedColor + ',text=white,circular drop shadow}';
+			header += colorStyle;
+		}
+	
+		header += ']\n';
+	
+		var body = this.generateLaTeXBody();
+		var footer = '\\end{tikzpicture}\n' +
+					 '\\end{document}\n';
+	
+		return header + body + footer;
+	};
+	
 
     this.generateLaTeXBody = function() {
 		var latexBody = '';
@@ -63,28 +76,12 @@ function ExportAsLaTeX() {
 			if (node.isInitial) stateOptions.push('initial');
 			if (node.isAcceptState) stateOptions.push('accepting');
 			var stateOptionsStr = stateOptions.length > 0 ? ',' + stateOptions.join(',') + '' : '';
-			latexBody += '\\node[state' + stateOptionsStr + '] (' + node.text + ') at (' + 
+			latexBody += '\\node[state' + stateOptionsStr + '] (' + node.id + ') at (' + 
 						 fixed(node.x * this._scale, 2) + ',' + fixed(-node.y * this._scale, 2) + ') {' + node.text + '};\n';
 		}
 
 
-		// // Loop through links to generate LaTeX code for transitions
-		// for (i = 0; i < links.length; i++) {
-		// 	var link = links[i];
-		// 	console.log(links[i])
-		// 	if (link instanceof SelfLink) {
-		// 		latexBody += '\\path[->] (' + link.node.text + ') edge[loop above] node {' + link.text + '} ();\n';
-		// 	} else {
-		// 		var edgeOptions = '';
-		// 		if (link.perpendicularPart !== 0) {
-		// 			// Determine bending angle based on the perpendicular part
-		// 			var bendAngle = Math.abs(link.perpendicularPart); // Adjust the factor to control the bend
-		// 			// edgeOptions = 'bend ' + (link.perpendicularPart < 0 ? 'left=' : 'right=') + bendAngle + ' ';
-		// 			edgeOptions = 'bend left=' + 10 + ' ';
-		// 		}
-		// 		latexBody += '\\path[->] (' + link.nodeA.text + ') edge[' + edgeOptions + '] node {' + link.text + '} (' + link.nodeB.text + ');\n';
-		// 	}
-		// }
+
 		const pi = 3.141592653;
 
 		for (i = 0; i < links.length; i++) {
@@ -99,10 +96,10 @@ function ExportAsLaTeX() {
 				} else if (link.anchorAngle > -pi / 4 && link.anchorAngle < pi / 4) {
 					loop = "right";
 				}
-				latexBody += '\\path[->] (' + link.node.text + ') edge[loop ' + loop + '] node {' + link.text + '} ();\n';
+				latexBody += '\\path[->] (' + link.node.id + ') edge[loop ' + loop + '] node {' + link.text + '} ();\n';
 			} else if (link.perpendicularPart === 0) {
 				// Straight link
-				latexBody += '\\path[->] (' + link.nodeA.text + ') edge node {' + link.text + '} (' + link.nodeB.text + ');\n';
+				latexBody += '\\path[->] (' + link.nodeA.id + ') edge node {' + link.text + '} (' + link.nodeB.id + ');\n';
 			} else {
 				// Curved link
 				console.log(link)
@@ -119,7 +116,7 @@ function ExportAsLaTeX() {
 				if (link.perpendicularPart > 0) {
 					swap = ', swap';
 				}
-				latexBody += '\\path[->] (' + link.nodeA.text + ') edge[' + direction + bendValue + ' ' + swap + '] node {' + link.text + '} (' + link.nodeB.text + ');\n';
+				latexBody += '\\path[->] (' + link.nodeA.id + ') edge[' + direction + bendValue + ' ' + swap + '] node {' + link.text + '} (' + link.nodeB.id + ');\n';
 			}
 		}
 	
@@ -556,6 +553,8 @@ Link.prototype.containsPoint = function(x, y) {
 	return false;
 };
 
+var globalCounter = 0;
+
 function Node(x, y) {
 	this.x = x;
 	this.y = y;
@@ -566,7 +565,8 @@ function Node(x, y) {
 
 	 // Additional properties for LaTeX export
 	 this.isInitial = false; // Indicates initial state
-	 this.name = ''; // Name identifier for the state
+
+	 this.id = '' + (globalCounter++); // Name identifier for the state
 }
 
 Node.prototype.setMouseStart = function(x, y) {
@@ -580,10 +580,13 @@ Node.prototype.setAnchorPoint = function(x, y) {
 };
 
 Node.prototype.draw = function(c) {
-	// draw the circle
-	c.beginPath();
-	c.arc(this.x, this.y, nodeRadius, 0, 2 * Math.PI, false);
-	c.stroke();
+	// c.fillStyle = selectedColor !== 'default' ? selectedColor : 'white'; // Replace 'black' with your default color
+
+    // Draw the circle
+    c.beginPath();
+    c.arc(this.x, this.y, nodeRadius, 0, 2 * Math.PI, false);
+    // c.fill(); // Ensure to fill the node with the selected color
+    c.stroke();
 
 	// draw the text
 	drawText(c, this.text, this.x, this.y, null, selectedObject == this);
@@ -838,7 +841,20 @@ function convertLatexShortcuts(text) {
 		text = text.replace(new RegExp('_' + i, 'g'), String.fromCharCode(8320 + i));
 	}
 
-	return text;
+	 var latexSymbols = {
+        '\\rightarrow': '\u2192', // Unicode for right arrow
+        '\\leftarrow': '\u2190',  // Unicode for left arrow
+        '\\emptyset': '\u2205',   // Unicode for empty set
+        '\\sqcup': '\u2294'       // Unicode for square union
+    };
+
+    for (var key in latexSymbols) {
+        if (latexSymbols.hasOwnProperty(key)) {
+            text = text.replace(new RegExp(key, 'g'), latexSymbols[key]);
+        }
+    }
+
+    return text;
 }
 
 function textToXML(text) {
@@ -1048,7 +1064,7 @@ window.onload = function() {
 
 			if(selectedObject == null) {
 				if(targetNode != null) {
-					currentLink = new StartLink(targetNode, originalClick);
+					// currentLink = new StartLink(targetNode, originalClick);
 				} else {
 					currentLink = new TemporaryLink(originalClick, mouse);
 				}

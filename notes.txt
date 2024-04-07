@@ -1,5 +1,34 @@
 
 
+
+Higher Priority:
+- initial state functionality
+- no mid air arrows
+- how to handle name? 
+    - give each node a counter label, and use the name separately?
+- 
+
+
+Lower Priority:
+- adjust angle anchor values
+- add color changing feature
+- adjust self links and links look
+- clean up codebase
+- add DNS 
+- check UNC and add add'l func (right arrow, etc.)
+- make sure backup and cookies work! (like with new properties and colors)
+- disable the drawing too
+- clear everything button
+- make sure symbols work correctly (add $$ around them)
+
+Misc:
+, every state/.style={fill,draw=none,orange,text=white,circular drop shadow}
+
+Blue, Green, Orange, Red 
+
+
+
+
 To Do:
 - fix arcs 
 - fix self loops
@@ -12,11 +41,3 @@ To Do:
 
 two nodes can't have same name
 all nodes must have names
-
-
-Colors:
-Blue, Green, Orange, Red 
-- other style changes
-
-
-, every state/.style={fill,draw=none,orange,text=white,circular drop shadow}
