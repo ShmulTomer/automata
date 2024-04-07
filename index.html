@@ -132,11 +132,18 @@
         .style-btn {
             padding: 10px 20px;
             margin: 0 10px;
-            border: 2px solid transparent;
+            border: 2px solid #d3d3d3; /* Adding a light grey border */
             border-radius: 5px;
             background-color: #fdfdfd;
             cursor: pointer;
             transition: all 0.3s ease;
+        }
+
+
+        .style-btn img {
+            width: 55px;
+            height: 55px;
+            background-color: transparent;
         }
 
         .style-btn:active,
@@ -216,9 +223,9 @@ if (typeof btoa == 'undefined') {
 	<div>
 		<!-- <p class="center">Export as: <a href="javascript:saveAsPNG()">PNG</a> | <a href="javascript:saveAsSVG()">SVG</a> | <a href="javascript:saveAsLaTeX()">LaTeX</a></p> -->
         <p class="center">
-            <button onclick="setColor('default')" id="defaultButton" class="style-btn">Default</button>
-            <button onclick="setColor('style1')" id="style1Button" class="style-btn">Blue/Green</button>
-            <button onclick="setColor('style2')" id="style2Button" class="style-btn">Red/Orange</button>
+            <button onclick="setColor('default')" id="defaultButton" class="style-btn"><img src="images/DefaultStyle.png" alt="Default" /></button>
+            <button onclick="setColor('style1')" id="style1Button" class="style-btn"><img src="images/Style1.png" alt="Blue/Green" /></button>
+            <button onclick="setColor('style2')" id="style2Button" class="style-btn"><img src="images/Style2.png" alt="Red/Orange" /></button>
         </p>
         
         
@@ -228,7 +235,7 @@ if (typeof btoa == 'undefined') {
             <a href="javascript:saveAsPNG()"><button class="export">Export as PNG</button></a>
             <a href="javascript:saveAsLaTeX()">
                 <button class="export">
-                    Export as <img src="LaTeX_logo.png" alt="LaTeX Logo" />
+                    Export as <img src="images/LaTeX_logo.png" alt="LaTeX Logo" />
                 </button>
             </a>
             <button onclick="clearAll()" id="clearButton" class="export clear">Clear Everything</button>
