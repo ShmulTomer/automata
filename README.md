@@ -28,7 +28,10 @@ If you want to contribute to this tool, create a pull request (direct pushes to 
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://www.tomershmul.com/"><img src="https://avatars.githubusercontent.com/u/45541706?v=4?s=70" width="70px;" alt="Tomer Shmul"/><br /><sub><b>Tomer Shmul</b></sub></a><br /><a href="https://github.com/ShmulTomer/npx all-contributors add ShmulTomer code/commits?author=ShmulTomer" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.tomershmul.com/"><img src="https://avatars.githubusercontent.com/u/45541706?v=4?s=70" width="70px;" alt="Tomer Shmul"/><br /><sub><b>Tomer Shmul</b></sub></a><br /><a href="https://github.com/ShmulTomer/npx all-contributors add ShmulTomer code/commits?author=ShmulTomer" title="Code">💻</a> <a href="#ideas-ShmulTomer" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/akaashdash"><img src="https://avatars.githubusercontent.com/u/28941213?v=4?s=70" width="70px;" alt="Akaash Dash"/><br /><sub><b>Akaash Dash</b></sub></a><br /><a href="https://github.com/ShmulTomer/npx all-contributors add ShmulTomer code/commits?author=akaashdash" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/msteele3"><img src="https://avatars.githubusercontent.com/u/94016758?v=4?s=70" width="70px;" alt="msteele3"/><br /><sub><b>msteele3</b></sub></a><br /><a href="https://github.com/ShmulTomer/npx all-contributors add ShmulTomer code/commits?author=msteele3" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/AuWiMo"><img src="https://avatars.githubusercontent.com/u/26367550?v=4?s=70" width="70px;" alt="auwimo"/><br /><sub><b>auwimo</b></sub></a><br /><a href="https://github.com/ShmulTomer/npx all-contributors add ShmulTomer code/commits?author=AuWiMo" title="Code">💻</a></td>
     </tr>
   </tbody>
   <tfoot>
@@ -44,6 +47,9 @@ If you want to contribute to this tool, create a pull request (direct pushes to 
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
 
 - Tomer Shmul
 - Matt Steele
