@@ -1,3 +1,4 @@
+# TODO
 
 Higher Priority:
 - initial state functionality
@@ -11,8 +12,7 @@ Lower Priority:
     - better buttons
 - clear everything button functionality 
 - add DNS 
-- make sure backup and cookies work! (like with new properties and colors)
-- make it public but not able to push to main, PRs needed w/ Ladha as admin
+- make sure backup and cookies work with new stuff! (like with new properties and colors)
 - what to do about circles increasing in size?
 - make accepting states more noticeable
 
