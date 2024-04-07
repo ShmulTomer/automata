@@ -1,43 +1,23 @@
 
-
-
 Higher Priority:
 - initial state functionality
-- no mid air arrows
-- how to handle name? 
-    - give each node a counter label, and use the name separately?
-- 
-
 
 Lower Priority:
+- symbol functionality (and add $$ around them)
+    - add $$ around symbols
+- color changing functionality
+    - make it work correctly
+    - accepting state should be visible
+    - better buttons
+- clear everything button functionality 
+- add DNS 
+- make sure backup and cookies work! (like with new properties and colors)
+- make it public but not able to push to main, PRs needed w/ Ladha as admin
+- what to do about circles increasing in size?
+- make accepting states more noticeable
+
+Lowest Priority:
 - adjust angle anchor values
-- add color changing feature
+- get rid of mid air arrows drawing
 - adjust self links and links look
 - clean up codebase
-- add DNS 
-- check UNC and add add'l func (right arrow, etc.)
-- make sure backup and cookies work! (like with new properties and colors)
-- disable the drawing too
-- clear everything button
-- make sure symbols work correctly (add $$ around them)
-
-Misc:
-, every state/.style={fill,draw=none,orange,text=white,circular drop shadow}
-
-Blue, Green, Orange, Red 
-
-
-
-
-To Do:
-- fix arcs 
-- fix self loops
-- handle changes with new package
-    - name vs text field
-    - can two nodes have the same name? maybe diff. b/w text and name 
-    - can nodes have no name?
-
-
-
-two nodes can't have same name
-all nodes must have names

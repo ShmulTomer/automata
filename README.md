@@ -1,9 +1,10 @@
-# Finite State Machine Designer
+# Automata / Finite State Machine Designer
 
 Contributors:
 - Tomer Shmul
 - Matt Steele
 - Austin Morris
+- Akaash Dash
 
 Inspiration:
 - http://madebyevan.com/fsm/

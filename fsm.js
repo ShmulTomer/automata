@@ -580,13 +580,16 @@ Node.prototype.setAnchorPoint = function(x, y) {
 };
 
 Node.prototype.draw = function(c) {
-	// c.fillStyle = selectedColor !== 'default' ? selectedColor : 'white'; // Replace 'black' with your default color
+    // Set fill style based on selectedColor
+    c.fillStyle = (selectedColor !== 'default') ? selectedColor : 'white';
 
     // Draw the circle
     c.beginPath();
     c.arc(this.x, this.y, nodeRadius, 0, 2 * Math.PI, false);
-    // c.fill(); // Ensure to fill the node with the selected color
+    c.fill();
     c.stroke();
+
+	c.fillStyle = (selectedColor !== 'default') ? 'white' : 'black';
 
 	// draw the text
 	drawText(c, this.text, this.x, this.y, null, selectedObject == this);
