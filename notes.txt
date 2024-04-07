@@ -8,7 +8,7 @@ Lower Priority:
 - symbol functionality (rightarrow, leftarrow, sqcup, emptyset)
     - add $$ around symbols so they export to latex properly
 - node color changing functionality
-    - make it work correctly
+    - make it work correctly (doesn't update at first till Canvas is hovered)
     - accepting state should be visible
     - better buttons
 - clear everything button functionality 
