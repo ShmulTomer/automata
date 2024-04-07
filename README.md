@@ -12,7 +12,9 @@ This tool is based on the already excellent [website by Evan Wallace](http://mad
 ## Local Setup
 
 In the main directory:
+
 `npm install`
+
 `live-server`
 
 ## Contributors
