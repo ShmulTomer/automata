@@ -1,0 +1,25 @@
+{
+  "projectName": "npx all-contributors add ShmulTomer code",
+  "projectOwner": "ShmulTomer",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 70,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "ShmulTomer",
+      "name": "Tomer Shmul",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45541706?v=4",
+      "profile": "https://www.tomershmul.com/",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": true
+}
