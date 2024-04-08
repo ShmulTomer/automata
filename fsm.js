@@ -156,7 +156,7 @@ function ExportAsLaTeX() {
         "," +
         fixed(-node.y * this._scale, 2) +
         ") {$" +
-        (node.text.length == 0 ? " " : node.text.replaceAll('\\epsilon', '\\varepsilon')) +
+        (node.text.length == 0 ? " " : node.text.replaceAll('\\epsilon', '\\varepsilon').replaceAll(' ', '~')) +
         "$};\n";
     }
 
@@ -191,7 +191,7 @@ function ExportAsLaTeX() {
           "\\path[->] (" +
           link.nodeA.id +
           ") edge node [swap] {$" +
-          (link.text.length == 0 ? " " : link.text.replaceAll('\\epsilon', '\\varepsilon')) +
+          (link.text.length == 0 ? " " : link.text.replaceAll('\\epsilon', '\\varepsilon').replaceAll(' ', '~')) +
           "$} (" +
           link.nodeB.id +
           ");\n";
@@ -220,9 +220,9 @@ function ExportAsLaTeX() {
           bendValue +
           " " +
           swap +
-          "] node {" +
-          link.text +
-          "} (" +
+          "] node {$" +
+          (link.text.length == 0 ? " " : link.text.replaceAll('\\epsilon', '\\varepsilon').replaceAll(' ', '~')) +
+          "$} (" +
           link.nodeB.id +
           ");\n";
       }
