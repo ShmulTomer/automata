@@ -1376,7 +1376,12 @@ var originalClick;
 function drawUsing(c) {
   c.clearRect(0, 0, canvas.width, canvas.height);
   c.save();
-  c.translate(0.5, 0.5);
+  c.translate(0.5, 0.5); // For crisp lines
+
+  if (typeof c.scale === "function") {
+    var scale = 2; // Adjust the scale factor based on your new canvas resolution
+    c.scale(scale, scale); // Apply scaling
+  }
 
   for (var i = 0; i < nodes.length; i++) {
     c.lineWidth = 1;
