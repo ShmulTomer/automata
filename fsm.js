@@ -76,24 +76,12 @@ function setColor(color) {
 }
 
 function clearAll(noAlert = false) {
-  if (!noAlert) {
-    if (
-      confirm(
-        "Are you sure you want to clear everything? This cannot be undone.",
-      )
-    ) {
-      // Clear the arrays
-      nodes = [];
-      links = [];
-
-      // Reset selected object
-      selectedObject = null;
-      globalCounter = 0;
-
-      // Redraw the canvas
-      draw();
-    }
-  } else {
+  if (!noAlert && !confirm(
+	"Are you sure you want to clear everything? This cannot be undone.",
+  )) {
+	return;
+  }
+   
     // Clear the arrays
     nodes = [];
     links = [];
@@ -104,7 +92,7 @@ function clearAll(noAlert = false) {
 
     // Redraw the canvas
     draw();
-  }
+  
 }
 
 // draw using this instead of a canvas and call toLaTeX() afterward
