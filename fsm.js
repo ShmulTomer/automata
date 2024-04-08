@@ -1074,6 +1074,7 @@ function restoreBackup(backupData) {
       node.id = backupNode.id;
       nodes.push(node);
     }
+	
     for (var i = 0; i < backup.links.length; i++) {
       var backupLink = backup.links[i];
       var link = null;
