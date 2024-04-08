@@ -882,7 +882,8 @@ Node.prototype.draw = function (c) {
 
   // write text for initial state
   if (this.isInitial) {
-    drawText(c, "start →", this.x - 70, this.y, null, selectedObject == this);
+	c.fillStyle = "black";
+    drawText(c, "start ›", this.x - 55, this.y, null, selectedObject == this);
   }
 };
 
