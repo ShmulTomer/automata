@@ -168,7 +168,7 @@ function ExportAsLaTeX() {
         "," +
         fixed(-node.y * this._scale, 2) +
         ") {$" +
-        (node.text.length == 0 ? " " : node.text) +
+        (node.text.length == 0 ? " " : node.text.replaceAll('\\epsilon', '\\varepsilon')) +
         "$};\n";
     }
 
@@ -203,7 +203,7 @@ function ExportAsLaTeX() {
           "\\path[->] (" +
           link.nodeA.id +
           ") edge node [swap] {$" +
-          (link.text.length == 0 ? " " : link.text) +
+          (link.text.length == 0 ? " " : link.text.replaceAll('\\epsilon', '\\varepsilon')) +
           "$} (" +
           link.nodeB.id +
           ");\n";
