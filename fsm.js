@@ -76,23 +76,25 @@ function setColor(color) {
 }
 
 function clearAll(noAlert = false) {
-  if (!noAlert && !confirm(
-	"Are you sure you want to clear everything? This cannot be undone.",
-  )) {
-	return;
+  if (
+    !noAlert &&
+    !confirm(
+      "Are you sure you want to clear everything? This cannot be undone.",
+    )
+  ) {
+    return;
   }
-   
-    // Clear the arrays
-    nodes = [];
-    links = [];
 
-    // Reset selected object
-    selectedObject = null;
-    globalCounter = 0;
+  // Clear the arrays
+  nodes = [];
+  links = [];
 
-    // Redraw the canvas
-    draw();
-  
+  // Reset selected object
+  selectedObject = null;
+  globalCounter = 0;
+
+  // Redraw the canvas
+  draw();
 }
 
 // draw using this instead of a canvas and call toLaTeX() afterward
@@ -156,7 +158,11 @@ function ExportAsLaTeX() {
         "," +
         fixed(-node.y * this._scale, 2) +
         ") {$" +
-        (node.text.length == 0 ? " " : node.text.replaceAll('\\epsilon', '\\varepsilon').replaceAll(' ', '~')) +
+        (node.text.length == 0
+          ? " "
+          : node.text
+              .replaceAll("\\epsilon", "\\varepsilon")
+              .replaceAll(" ", "~")) +
         "$};\n";
     }
 
@@ -191,7 +197,11 @@ function ExportAsLaTeX() {
           "\\path[->] (" +
           link.nodeA.id +
           ") edge node [swap] {$" +
-          (link.text.length == 0 ? " " : link.text.replaceAll('\\epsilon', '\\varepsilon').replaceAll(' ', '~')) +
+          (link.text.length == 0
+            ? " "
+            : link.text
+                .replaceAll("\\epsilon", "\\varepsilon")
+                .replaceAll(" ", "~")) +
           "$} (" +
           link.nodeB.id +
           ");\n";
@@ -221,7 +231,11 @@ function ExportAsLaTeX() {
           " " +
           swap +
           "] node {$" +
-          (link.text.length == 0 ? " " : link.text.replaceAll('\\epsilon', '\\varepsilon').replaceAll(' ', '~')) +
+          (link.text.length == 0
+            ? " "
+            : link.text
+                .replaceAll("\\epsilon", "\\varepsilon")
+                .replaceAll(" ", "~")) +
           "$} (" +
           link.nodeB.id +
           ");\n";
@@ -870,7 +884,7 @@ Node.prototype.draw = function (c) {
 
   // write text for initial state
   if (this.isInitial) {
-	c.fillStyle = "black";
+    c.fillStyle = "black";
     drawText(c, "start ›", this.x - 55, this.y, null, false);
   }
 };
@@ -1068,7 +1082,7 @@ function restoreBackup(backupData) {
       node.id = backupNode.id;
       nodes.push(node);
     }
-	
+
     for (var i = 0; i < backup.links.length; i++) {
       var backupLink = backup.links[i];
       var link = null;
@@ -1254,12 +1268,23 @@ function convertLatexShortcuts(text) {
   }
 
   // subscripts
-  for (var i = 0; i < 10; i++) {
-    text = text.replace(
-      new RegExp("_" + i, "g"),
-      String.fromCharCode(8320 + i),
-    );
-  }
+  text = text.replace(/_({[^}]*})/g, function (match, p1) {
+    return p1
+      .substring(1, p1.length - 1) // Remove curly braces
+      .split("")
+      .map((char) => {
+        var code = char.charCodeAt(0);
+        return code >= 48 && code <= 57 // Check if character is a digit
+          ? String.fromCharCode(8320 + code - 48) // Convert to subscript
+          : char; // Keep non-digit characters unchanged
+      })
+      .join("");
+  });
+
+  // Single digit subscripts without curly braces
+  text = text.replace(/_([0-9])/g, function (match, p1) {
+    return String.fromCharCode(8320 + Number(p1));
+  });
 
   var latexSymbols = {
     "\\\\rightarrow": "\u2192", // Unicode for right arrow
