@@ -168,7 +168,7 @@ function ExportAsLaTeX() {
         "," +
         fixed(-node.y * this._scale, 2) +
         ") {$" +
-        node.text +
+        (node.text.length == 0 ? " " : node.text) +
         "$};\n";
     }
 
@@ -203,7 +203,7 @@ function ExportAsLaTeX() {
           "\\path[->] (" +
           link.nodeA.id +
           ") edge node [swap] {$" +
-          link.text +
+          (link.text.length == 0 ? " " : link.text) +
           "$} (" +
           link.nodeB.id +
           ");\n";
