@@ -1268,10 +1268,10 @@ function convertLatexShortcuts(text) {
   }
 
   var latexSymbols = {
-    "\\rightarrow": "\u2192", // Unicode for right arrow
-    "\\leftarrow": "\u2190", // Unicode for left arrow
-    "\\emptyset": "\u2205", // Unicode for empty set
-    "\\sqcup": "\u2294", // Unicode for square union
+    "\\\\rightarrow": "\u2192", // Unicode for right arrow
+    "\\\\leftarrow": "\u2190", // Unicode for left arrow
+    "\\\\emptyset": "\u2205", // Unicode for empty set
+    "\\\\sqcup": "\u2294", // Unicode for square union
   };
 
   for (var key in latexSymbols) {
