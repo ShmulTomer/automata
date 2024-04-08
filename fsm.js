@@ -879,6 +879,11 @@ Node.prototype.draw = function (c) {
     c.arc(this.x, this.y, nodeRadius - 6, 0, 2 * Math.PI, false);
     c.stroke();
   }
+
+  // write text for initial state
+  if (this.isInitial) {
+    drawText(c, "start →", this.x - 70, this.y, null, selectedObject == this);
+  }
 };
 
 Node.prototype.closestPointOnCircle = function (x, y) {
@@ -1585,6 +1590,12 @@ document.onkeydown = function (e) {
         }
       }
       selectedObject = null;
+      draw();
+    }
+  } else if (key == 13) {
+    // enter key
+    if (selectedObject != null) {
+      selectedObject.isInitial = !selectedObject.isInitial;
       draw();
     }
   }
