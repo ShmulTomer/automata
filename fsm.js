@@ -162,6 +162,7 @@ function ExportAsLaTeX() {
           ? " "
           : node.text
               .replaceAll("\\epsilon", "\\varepsilon")
+              .replaceAll("\\sqcup", "\\textvisiblespace")
               .replaceAll(" ", "~")) +
         "$};\n";
     }
