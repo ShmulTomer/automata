@@ -57,7 +57,7 @@
       div {
         margin: 30px auto;
         text-align: left;
-        max-width: 800px;
+        max-width: 900px;
         padding: 0 20px;
       }
 
@@ -317,6 +317,10 @@
         outline: none; /* Remove default focus outline */
         box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glowing effect on focus */
       }
+
+
+    
+
     </style>
     <script src="fsm.js"></script>
     <script>
@@ -400,6 +404,9 @@
         </a>
         <button onclick="clearAll()" id="clearButton" class="export clear">
           Clear Everything
+        </button>
+        <button onclick="deleteSelectedNode()" id="clearButton" class="export clear">
+          Delete Selection
         </button>
       </p>
       <p class="center">
