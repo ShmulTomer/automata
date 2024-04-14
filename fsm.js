@@ -151,20 +151,21 @@ function ExportAsLaTeX() {
       latexBody +=
         "\\node[state" +
         stateOptionsStr +
-        "] (" +
-        node.id +
-        ") at (" +
-        fixed(node.x * this._scale, 2) +
-        "," +
-        fixed(-node.y * this._scale, 2) +
-        ") {$" +
+        ", label=center:{$" +
         (node.text.length == 0
           ? " "
           : node.text
               .replaceAll("\\epsilon", "\\varepsilon")
               .replaceAll("\\sqcup", "\\textvisiblespace")
               .replaceAll(" ", "~")) +
-        "$};\n";
+        "$}" +
+        "] (" +
+        node.id +
+        ") at (" +
+        fixed(node.x * this._scale, 2) +
+        "," +
+        fixed(-node.y * this._scale, 2) +
+        ") {};\n";
     }
 
     const pi = 3.141592653;
