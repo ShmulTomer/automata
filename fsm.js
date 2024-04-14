@@ -162,6 +162,7 @@ function ExportAsLaTeX() {
           ? " "
           : node.text
               .replaceAll("\\epsilon", "\\varepsilon")
+              .replaceAll("\\sqcup", "\\textvisiblespace")
               .replaceAll(" ", "~")) +
         "$};\n";
     }
@@ -1291,6 +1292,10 @@ function convertLatexShortcuts(text) {
     "\\\\leftarrow": "\u2190", // Unicode for left arrow
     "\\\\emptyset": "\u2205", // Unicode for empty set
     "\\\\sqcup": "\u2294", // Unicode for square union
+    "\\\\textvisiblespace": "\u2423", // Unicode for visible space
+    "\\\\infty": "\u221E", // Unicode for infinity
+    "\\\\vdash": "\u22A2",  // Unicode for right tack (used to denote that a configuration yields another)
+    "\\\\dashv": "\u22A3",  // Unicode for left tack (used for reverse transitions)
   };
 
   for (var key in latexSymbols) {
