@@ -163,6 +163,8 @@ function ExportAsLaTeX() {
           : node.text
               .replaceAll("\\epsilon", "\\varepsilon")
               .replaceAll("\\sqcup", "\\textvisiblespace")
+              .replaceAll("$", "\\$")
+              .replaceAll("#", "\\#")
               .replaceAll(" ", "~")) +
         "$};\n";
     }
@@ -202,6 +204,9 @@ function ExportAsLaTeX() {
             ? " "
             : link.text
                 .replaceAll("\\epsilon", "\\varepsilon")
+                .replaceAll("\\sqcup", "\\textvisiblespace")
+                .replaceAll("$", "\\$")
+                .replaceAll("#", "\\#")
                 .replaceAll(" ", "~")) +
           "$} (" +
           link.nodeB.id +
@@ -236,6 +241,9 @@ function ExportAsLaTeX() {
             ? " "
             : link.text
                 .replaceAll("\\epsilon", "\\varepsilon")
+                .replaceAll("\\sqcup", "\\textvisiblespace")
+                .replaceAll("$", "\\$")
+                .replaceAll("#", "\\#")
                 .replaceAll(" ", "~")) +
           "$} (" +
           link.nodeB.id +
