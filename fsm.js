@@ -155,10 +155,12 @@ function ExportAsLaTeX() {
         (node.text.length == 0
           ? " "
           : node.text
-              .replaceAll("\\epsilon", "\\varepsilon")
-              .replaceAll("\\blank", "\\textvisiblespace")
+              .replaceAll("\\", "\uFFFF")
+              .replaceAll("\uFFFFepsilon", "\\varepsilon")
+              .replaceAll("\uFFFFblank", "\\textvisiblespace")
               .replaceAll("$", "\\$")
               .replaceAll("#", "\\#")
+              .replaceAll("\uFFFF", "\\\\")
               .replaceAll(" ", "~")) +
         "$}" +
         "] (" +
