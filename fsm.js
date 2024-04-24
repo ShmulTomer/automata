@@ -204,7 +204,7 @@ function ExportAsLaTeX() {
             ? " "
             : link.text
                 .replaceAll("\\epsilon", "\\varepsilon")
-                .replaceAll("\\sqcup", "\\textvisiblespace")
+                .replaceAll("\\blank", "\\textvisiblespace")
                 .replaceAll("$", "\\$")
                 .replaceAll("#", "\\#")
                 .replaceAll(" ", "~")) +
