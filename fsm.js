@@ -156,7 +156,9 @@ function ExportAsLaTeX() {
           ? " "
           : node.text
               .replaceAll("\\epsilon", "\\varepsilon")
-              .replaceAll("\\sqcup", "\\textvisiblespace")
+              .replaceAll("\\blank", "\\textvisiblespace")
+              .replaceAll("$", "\\$")
+              .replaceAll("#", "\\#")
               .replaceAll(" ", "~")) +
         "$}" +
         "] (" +
@@ -203,6 +205,9 @@ function ExportAsLaTeX() {
             ? " "
             : link.text
                 .replaceAll("\\epsilon", "\\varepsilon")
+                .replaceAll("\\blank", "\\textvisiblespace")
+                .replaceAll("$", "\\$")
+                .replaceAll("#", "\\#")
                 .replaceAll(" ", "~")) +
           "$} (" +
           link.nodeB.id +
@@ -237,6 +242,9 @@ function ExportAsLaTeX() {
             ? " "
             : link.text
                 .replaceAll("\\epsilon", "\\varepsilon")
+                .replaceAll("\\blank", "\\textvisiblespace")
+                .replaceAll("$", "\\$")
+                .replaceAll("#", "\\#")
                 .replaceAll(" ", "~")) +
           "$} (" +
           link.nodeB.id +
@@ -1297,6 +1305,7 @@ function convertLatexShortcuts(text) {
     "\\\\infty": "\u221E", // Unicode for infinity
     "\\\\vdash": "\u22A2",  // Unicode for right tack (used to denote that a configuration yields another)
     "\\\\dashv": "\u22A3",  // Unicode for left tack (used for reverse transitions)
+    "\\\\blank": "\u2423",  // Shortcut for a visible space
   };
 
   for (var key in latexSymbols) {
