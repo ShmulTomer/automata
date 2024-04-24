@@ -162,7 +162,7 @@ function ExportAsLaTeX() {
           ? " "
           : node.text
               .replaceAll("\\epsilon", "\\varepsilon")
-              .replaceAll("\\sqcup", "\\textvisiblespace")
+              .replaceAll("\\blank", "\\textvisiblespace")
               .replaceAll("$", "\\$")
               .replaceAll("#", "\\#")
               .replaceAll(" ", "~")) +
@@ -1304,6 +1304,7 @@ function convertLatexShortcuts(text) {
     "\\\\infty": "\u221E", // Unicode for infinity
     "\\\\vdash": "\u22A2",  // Unicode for right tack (used to denote that a configuration yields another)
     "\\\\dashv": "\u22A3",  // Unicode for left tack (used for reverse transitions)
+    "\\\\blank": "\u2423",  // Unicode for white vertical rectangle (used for blank symbol)
   };
 
   for (var key in latexSymbols) {
