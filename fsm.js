@@ -97,6 +97,18 @@ function clearAll(noAlert = false) {
   draw();
 }
 
+function escapeLaTeX(str) {
+  return str
+      .replaceAll(/\\(?![a-zA-Z0-9_])/g, "\\backslash")
+      .replaceAll("$", "\\$")
+      .replaceAll("#", "\\#")
+      .replaceAll("%", "\\%")
+      .replaceAll("&", "\\&")
+      .replaceAll(" ", "~") // Replace spaces with non-breaking spaces
+      .replaceAll("\\epsilon", "\\varepsilon")
+      .replaceAll("\\blank", "\\textvisiblespace");
+}
+
 // draw using this instead of a canvas and call toLaTeX() afterward
 function ExportAsLaTeX() {
   this._texData = "";
@@ -152,14 +164,7 @@ function ExportAsLaTeX() {
         "\\node[state" +
         stateOptionsStr +
         ", label=center:{$" +
-        (node.text.length == 0
-          ? " "
-          : node.text
-              .replaceAll("\\epsilon", "\\varepsilon")
-              .replaceAll("\\blank", "\\textvisiblespace")
-              .replaceAll("$", "\\$")
-              .replaceAll("#", "\\#")
-              .replaceAll(" ", "~")) +
+        (node.text.length === 0 ? " " : escapeLaTeX(node.text)) +
         "$}" +
         "] (" +
         node.id +
@@ -201,14 +206,7 @@ function ExportAsLaTeX() {
           "\\path[->] (" +
           link.nodeA.id +
           ") edge node [swap] {$" +
-          (link.text.length == 0
-            ? " "
-            : link.text
-                .replaceAll("\\epsilon", "\\varepsilon")
-                .replaceAll("\\blank", "\\textvisiblespace")
-                .replaceAll("$", "\\$")
-                .replaceAll("#", "\\#")
-                .replaceAll(" ", "~")) +
+          (link.text.length === 0 ? " " : escapeLaTeX(link.text)) +
           "$} (" +
           link.nodeB.id +
           ");\n";
@@ -238,14 +236,7 @@ function ExportAsLaTeX() {
           " " +
           swap +
           "] node {$" +
-          (link.text.length == 0
-            ? " "
-            : link.text
-                .replaceAll("\\epsilon", "\\varepsilon")
-                .replaceAll("\\blank", "\\textvisiblespace")
-                .replaceAll("$", "\\$")
-                .replaceAll("#", "\\#")
-                .replaceAll(" ", "~")) +
+          (link.text.length === 0 ? " " : escapeLaTeX(link.text)) +
           "$} (" +
           link.nodeB.id +
           ");\n";
