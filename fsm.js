@@ -1022,6 +1022,7 @@ TemporaryLink.prototype.draw = function (c) {
   );
 };
 
+
 function saveAsJSON() {
   var data = createBackup();
   const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
@@ -1567,6 +1568,31 @@ window.onload = function () {
     }
   };
 };
+
+
+function deleteSelectedNode() {
+  if (selectedObject != null) {
+    for (var i = 0; i < nodes.length; i++) {
+      if (nodes[i] == selectedObject) {
+        nodes.splice(i--, 1);
+      }
+    }
+    for (var i = 0; i < links.length; i++) {
+      if (
+        links[i] == selectedObject ||
+        links[i].node == selectedObject ||
+        links[i].nodeA == selectedObject ||
+        links[i].nodeB == selectedObject
+      ) {
+        links.splice(i--, 1);
+      }
+    }
+    selectedObject = null;
+    draw();
+  }
+}
+
+
 
 var shift = false;
 
