@@ -43,6 +43,10 @@ If you want to contribute to this tool, create a pull request (direct pushes to 
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
+## Contact
+
+Email tshmul@gatech.edu for any other questions
+
 ## License
 
 This project is licensed under the MIT License.
